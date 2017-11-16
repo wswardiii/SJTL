@@ -1,0 +1,148 @@
+<html>
+
+<script type="text/javascript" src="sjtl-1.0.0-min.js"></script>
+
+<div id='sjtl_template_000'>
+
+
+      <!--
+
+
+
+<head><title>{mytitle}</title></head>
+
+<body>
+Using Arrays:&nbsp;{lbl_use_arrays}
+<table>
+    {use_arrays}
+        {mytable_usearrays}
+            {mylist_usearrays}
+                <tr>
+                    {[0]}
+                        <th>
+                            {[0:N]}
+                        </th>
+                    {}
+                </tr>
+            {}
+            {mylist_usearrays}
+                <tr>
+                    {[1:N]}
+                        <td>
+                            {[0:N]}
+                        </td>
+                    {}
+                </tr>
+            {}
+        {}
+    {}
+</table>
+<table>
+    {!use_arrays}
+        {mytable_useobjects}
+            <tr>
+                {myheader_useobjects}
+                    <th>
+                        {[0:N]}
+                    </th>
+                {}
+            </tr>
+            {mylist_useobjects}
+                <tr>
+                    {[0:N]}
+                        <td>
+                            {SOURCE_ID}
+                        </td>
+                        <td>
+                            {COMMODITY_DESC}
+                        </td>
+                        <td>
+                            {GEOGRAPHY_CODE}
+                        </td>
+                        <td>
+                            {GEOGRAPHY_DESC}
+                        </td>
+                        <td>
+                            {ATTRIBUTE_DESC}
+                        </td>
+                        <td>
+                            {UNIT_DESC}
+                        </td>
+                        <td>
+                            {YEAR_ID}
+                        </td>
+                        <td>
+                            {TIMEPERIOD_ID}
+                        </td>
+                        <td>
+                            {AMOUNT}
+                        </td>
+                    {}
+                </tr>
+            {}
+        {}
+    {}
+</table>
+
+</body>
+
+-->
+
+</div>
+
+<button id="btn_dogfish" onclick='render_fish("dogfish")'>Dogfish</button>
+<button id="btn_catfish" onclick='render_fish("catfish")'>Catfish</button>
+<button id="btn_salmom" onclick='render_fish("salmon")'>Salmon</button>&nbsp;Note that there is no "Salmon" data. This is meant to fail gracefully.
+<br>&nbsp;<br>
+<input type="checkbox" id="chk_use_arrays">Use arrays instead of objects<br>
+
+<div id='sjtl_render_000'>
+</div>
+
+<script>
+    
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function()
+    {
+        if (this.readyState == 4 && this.status == 200)
+        {
+            var sjtl = new sjtl_engine;
+            sjtl.s_template_divtag_id = "sjtl_template_000";
+            sjtl.s_render_divtag_id = "sjtl_render_000";
+            
+            try
+            {
+                sjtl.run_sjtl(this.responseText);
+            }
+            catch(err)
+            {
+                document.getElementById("sjtl_render_000").innerHTML = "";
+            }
+            finally
+            {
+                delete sjtl;
+                document.getElementById("btn_dogfish").disabled = false;
+                document.getElementById("btn_catfish").disabled = false;
+                document.getElementById("btn_salmom").disabled = false;
+            }
+        }
+    };
+
+    function render_fish(fishtype)
+    {
+        if(document.getElementById("chk_use_arrays").checked == true) use_arrays = "true";
+        else use_arrays = "false";
+        document.getElementById("btn_dogfish").disabled = true;
+        document.getElementById("btn_catfish").disabled = true;
+        document.getElementById("btn_salmom").disabled = true;
+        
+        var url = "http://sjtl2.x10host.com/sjtl_test.php?fishtype=" + fishtype + "&usearrays=" + use_arrays;
+
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+    }
+    
+</script>
+
+</html>

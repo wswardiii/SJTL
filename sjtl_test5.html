@@ -1,0 +1,62 @@
+<html>
+
+<script type="text/javascript" src="sjtl-1.0.0-min.js"></script>
+
+<div id='sjtl_template_000'>
+
+
+      <!--
+
+
+
+<head><title>{mytitle}</title></head>
+
+<body>
+
+<table>
+    {my_factory_motor_table}
+        <tr>
+            {[0]}
+                <th>
+                    {[0:N]}&nbsp;&nbsp;&nbsp;
+                </th>
+            {}
+        </tr>
+    {}
+    {my_factory_motor_table}
+        <tr>
+            {[1:N]}
+                <td>
+                    {[0]}
+                </td>
+            {-}
+                <td>
+                    <input type="checkbox" {[1:N]}></input>
+                </td>
+            {}
+        </tr>
+    {}
+</table>
+
+</body>
+
+-->
+
+</div>
+
+<script>
+    
+    var s_json = new String('{"mytitle":"Boolean Indicator Test","my_factory_motor_table":[["Motor:","Factory 1","Factory 2","Factory 3","Factory 4","Factory 5"],["Motor 1","checked","","checked","","checked"],["Motor 2","checked","checked","","","checked"],["Motor 3","","","checked","checked",""],["Motor 4","checked","","","checked","checked"],["Motor 5","","checked","checked","",""]]}');
+    var sjtl = new sjtl_engine;
+
+    sjtl.s_template_divtag_id = "sjtl_template_000";
+    sjtl.s_render_divtag_id = "sjtl_template_000";
+
+    sjtl.run_sjtl(s_json);
+
+    delete sjtl;
+    delete s_json;
+    
+</script>
+
+</html>

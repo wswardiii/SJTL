@@ -1,0 +1,80 @@
+<html>
+
+<script type="text/javascript" src="sjtl-1.0.0-min.js"></script>
+<object id="sjtl_test_template_object" data="sjtl_test_template_min.html" style="float:left;width:0%;height:0%;"></object>
+
+<button id="btn_dogfish" onclick='render_fish("dogfish")'>Dogfish</button>
+<button id="btn_catfish" onclick='render_fish("catfish")'>Catfish</button>
+<button id="btn_salmom" onclick='render_fish("salmon")'>Salmon</button>&nbsp;Note that there is no "Salmon" data. This is meant to fail gracefully.
+<br>&nbsp;<br>
+<input type="checkbox" id="chk_use_arrays">Use arrays instead of objects<br>
+
+<script>
+    
+    document.getElementById("btn_dogfish").disabled = true;
+    document.getElementById("btn_catfish").disabled = true;
+    document.getElementById("btn_salmom").disabled = true;
+    
+    document.getElementById("sjtl_test_template_object").onload = function() 
+    {
+        document.getElementById("sjtl_template_000").innerHTML = document.getElementById("sjtl_test_template_object").contentDocument.getElementById("sjtl_template_000").innerHTML;
+        document.getElementById("btn_dogfish").disabled = false;
+        document.getElementById("btn_catfish").disabled = false;
+        document.getElementById("btn_salmom").disabled = false;
+    };
+</script>
+
+<div id='sjtl_template_000'>
+</div>
+
+<div id='sjtl_render_000'>
+</div>
+
+<script>
+    
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function()
+    {
+        if (this.readyState == 4 && this.status == 200)
+        {
+            var sjtl = new sjtl_engine;
+            sjtl.s_template_divtag_id = "sjtl_template_000";
+            sjtl.s_render_divtag_id = "sjtl_render_000";
+
+            try
+            {
+                sjtl.run_sjtl(this.responseText);
+            }
+            finally
+            {
+                delete sjtl;
+                
+                document.getElementById("btn_dogfish").disabled = false;
+                document.getElementById("btn_catfish").disabled = false;
+                document.getElementById("btn_salmom").disabled = false;
+
+                return;
+            }
+        }
+    };
+
+    function render_fish(fishtype)
+    {
+        document.getElementById("sjtl_render_000").innerHTML = "";
+        document.getElementById("btn_dogfish").disabled = true;
+        document.getElementById("btn_catfish").disabled = true;
+        document.getElementById("btn_salmom").disabled = true;
+
+        if(document.getElementById("chk_use_arrays").checked == true) use_arrays = "true";
+        else use_arrays = "false";
+        
+        var url = "http://sjtl2.x10host.com/sjtl_test.php?fishtype=" + fishtype + "&usearrays=" + use_arrays;
+
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+    }
+    
+</script>
+
+</html>

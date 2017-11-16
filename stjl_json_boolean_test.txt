@@ -1,0 +1,54 @@
+{
+    "mytitle" : "Boolean Indicator Test",
+    "my_factory_motor_table" :
+    [
+        [   
+            "Motor:",
+            "Factory 1", 
+            "Factory 2", 
+            "Factory 3", 
+            "Factory 4", 
+            "Factory 5"
+        ],
+        [   
+            "Motor 1",
+            "checked", 
+            "", 
+            "checked", 
+            "", 
+            "checked"
+        ],
+        [   
+            "Motor 2",
+            "checked", 
+            "checked", 
+            "", 
+            "", 
+            "checked"
+        ],
+        [   
+            "Motor 3",
+            "", 
+            "", 
+            "checked", 
+            "checked", 
+            ""
+        ],
+        [   
+            "Motor 4",
+            "checked", 
+            "", 
+            "", 
+            "checked", 
+            "checked"
+        ],
+        [   
+            "Motor 5",
+            "", 
+            "checked", 
+            "checked", 
+            "", 
+            ""
+        ]
+    ]
+}
