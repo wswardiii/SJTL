@@ -1,5 +1,6 @@
 # SJTL
 Simple JSON Template Language
+<pre>
 
     SJTL (Simple Javascript Object Notation Template Language)
 
@@ -285,3 +286,5 @@ Following the usage of this command, the license header must be reinserted, and
 the function name "run_sjtl" and the member variable names 
 "s_template_divtag_id" and "s_render_divtag_id" must all be unshortened in the 
 minified file.
+
+</pre>
